@@ -1,0 +1,14 @@
+C:\Users\student\source\repos\ThreadJoins\ThreadJoins\bin\Debug\ThreadJoins.exe.config
+C:\Users\student\source\repos\ThreadJoins\ThreadJoins\bin\Debug\ThreadJoins.exe
+C:\Users\student\source\repos\ThreadJoins\ThreadJoins\bin\Debug\ThreadJoins.pdb
+C:\Users\student\source\repos\ThreadJoins\ThreadJoins\obj\Debug\ThreadJoins.csprojAssemblyReference.cache
+C:\Users\student\source\repos\ThreadJoins\ThreadJoins\obj\Debug\ThreadJoins.csproj.CoreCompileInputs.cache
+C:\Users\student\source\repos\ThreadJoins\ThreadJoins\obj\Debug\ThreadJoins.exe
+C:\Users\student\source\repos\ThreadJoins\ThreadJoins\obj\Debug\ThreadJoins.pdb
+D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\ThreadJoins\bin\Debug\ThreadJoins.exe.config
+D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\ThreadJoins\bin\Debug\ThreadJoins.exe
+D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\ThreadJoins\bin\Debug\ThreadJoins.pdb
+D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\ThreadJoins\obj\Debug\ThreadJoins.csprojAssemblyReference.cache
+D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\ThreadJoins\obj\Debug\ThreadJoins.csproj.CoreCompileInputs.cache
+D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\ThreadJoins\obj\Debug\ThreadJoins.exe
+D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\ThreadJoins\obj\Debug\ThreadJoins.pdb

@@ -1,0 +1,7 @@
+C:\Users\student\source\repos\ThreadJoins\PoolThreads\bin\Debug\PoolThreads.exe.config
+C:\Users\student\source\repos\ThreadJoins\PoolThreads\bin\Debug\PoolThreads.exe
+C:\Users\student\source\repos\ThreadJoins\PoolThreads\bin\Debug\PoolThreads.pdb
+C:\Users\student\source\repos\ThreadJoins\PoolThreads\obj\Debug\PoolThreads.csprojAssemblyReference.cache
+C:\Users\student\source\repos\ThreadJoins\PoolThreads\obj\Debug\PoolThreads.csproj.CoreCompileInputs.cache
+C:\Users\student\source\repos\ThreadJoins\PoolThreads\obj\Debug\PoolThreads.exe
+C:\Users\student\source\repos\ThreadJoins\PoolThreads\obj\Debug\PoolThreads.pdb

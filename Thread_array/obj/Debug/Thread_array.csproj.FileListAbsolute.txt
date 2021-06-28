@@ -1,0 +1,7 @@
+D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\Thread_array\bin\Debug\Thread_array.exe.config
+D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\Thread_array\bin\Debug\Thread_array.exe
+D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\Thread_array\bin\Debug\Thread_array.pdb
+D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\Thread_array\obj\Debug\Thread_array.csprojAssemblyReference.cache
+D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\Thread_array\obj\Debug\Thread_array.csproj.CoreCompileInputs.cache
+D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\Thread_array\obj\Debug\Thread_array.exe
+D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\Thread_array\obj\Debug\Thread_array.pdb

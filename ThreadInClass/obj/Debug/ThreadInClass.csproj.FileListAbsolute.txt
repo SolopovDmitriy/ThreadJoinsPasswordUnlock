@@ -1,0 +1,7 @@
+D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\ThreadInClass\bin\Debug\ThreadInClass.exe.config
+D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\ThreadInClass\bin\Debug\ThreadInClass.exe
+D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\ThreadInClass\bin\Debug\ThreadInClass.pdb
+D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\ThreadInClass\obj\Debug\ThreadInClass.csproj.CoreCompileInputs.cache
+D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\ThreadInClass\obj\Debug\ThreadInClass.exe
+D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\ThreadInClass\obj\Debug\ThreadInClass.pdb
+D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\ThreadInClass\obj\Debug\ThreadInClass.csprojAssemblyReference.cache
