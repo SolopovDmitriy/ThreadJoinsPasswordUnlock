@@ -13,17 +13,17 @@ namespace admChecker
     
     class Program
     {
-        static string realPassword = ""; // найденный пароль
-        static bool isFound;
-        static string alphabet;
+        static string realPassword; // найденный пароль
+        static bool isFound; //создаем булевую переменную  isFound
+        static string alphabet; //создаем строковую переменную  alphabet
 
 
-        public static void CheckPasword(string password)
+        public static void CheckPasword(string password) // string password == alphabetForFirstChar[k].ToString()
         {            
             try
             {
                 SecureString securePwd = new SecureString();
-                foreach (var item in password)
+                foreach (var item in password) //
                 {
                     securePwd.AppendChar(item);//AppendChar(item) - добавляем букву  - item в securePwd
                 }
@@ -39,8 +39,8 @@ namespace admChecker
             }
         }
 
-
-        static void FindPass(object alphabetForFirstCharObject)
+        //alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        static void FindPass(object alphabetForFirstCharObject) //object alphabetForFirstCharObject == alphabet.Substring(startIndex, alphabet.Length - startIndex) - 
         {
             string alphabetForFirstChar = (string)alphabetForFirstCharObject;
             // password with one letter
@@ -127,13 +127,13 @@ namespace admChecker
         }
 
 
-
-        static void Main(string[] args)
+       static void FindByThread(int countTreads)  // countTreads - колличество потоков: для 2 потоков - 15 sec // для 4 потоков - 9 sec// для 8 потоков долго //для 16 потоков долго
         {
             isFound = false;
+            realPassword = "";
             //alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            Console.WriteLine("alphabet.Length = " + alphabet.Length);
+            Console.WriteLine("alphabet.Length = " + alphabet.Length);// показываем длину алфафита
             //alphabet = s.ToCharArray();//массив символов
 
             // 0, 1, 2, ... 15      //  i = 0;   startIndex =  i * blockSize =  0 * 16 = 0;    осталось количество символов = alphabet.Length - startIndex = 62 - 0 = 62
@@ -147,28 +147,27 @@ namespace admChecker
             stopwatch.Start();
 
             // FindPassOneThread(); //для тестирования в однопоточном режиме   8 сек для пароля из двух букв         
-
-            int countTreads = 4; //колличество потоков: для 2 потоков - 15 sec // для 4 потоков - 9 sec// для 8 потоков долго //для 16 потоков долго
+                        
             List<Thread> threads = new List<Thread>(countTreads);   // создаем список потоков, на countTreads ячеек         
-            int blockSize = (int) Math.Ceiling((double) alphabet.Length / countTreads); // длину алфавита делим на колличество потоков (62 символов делим на 4 - ре потока и округляет в большую сторону = 16), для первой буквы пароля
-            Console.WriteLine("blockSize = " + blockSize);
-            for (int i = 0; i < countTreads; i++)
+            int blockSize = (int)Math.Ceiling((double)alphabet.Length / countTreads); // длину алфавита делим на колличество потоков (62 символов делим на 4 - ре потока и округляет в большую сторону = 16), для первой буквы пароля
+            Console.WriteLine("blockSize = " + blockSize);// blockSize -колличество символов в потоке
+            for (int i = 0; i < countTreads; i++) // countTreads - колличество потоков
             {
                 Thread thread = new Thread(FindPass); // создаём поток и говорим потоку, что он будет выполнять метод FindPass
                 threads.Add(thread); // добавляем поток в список потоков
                 int startIndex = i * blockSize; // startIndex -- это номер символа, с которого начинаем копировать строку
                 if (alphabet.Length - startIndex < blockSize) // если мы подошли близко к концу строки, осталось количество символов = alphabet.Length - startIndex = 62 - 48
-                {             
-                    
-                    thread.Start(alphabet.Substring(startIndex, alphabet.Length - startIndex)); 
-                    Console.WriteLine("symbols for thread №" + i + ": " +   alphabet.Substring(startIndex, alphabet.Length - startIndex)); //  осталось количество символов = alphabet.Length - startIndex = 62 - 48 = 14
+                { //alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+                    thread.Start(alphabet.Substring(startIndex, alphabet.Length - startIndex));
+                    Console.WriteLine("symbols for thread №" + i + ": " + alphabet.Substring(startIndex, alphabet.Length - startIndex)); //  осталось количество символов = alphabet.Length - startIndex = 62 - 48 = 14
                     break;
                 }
                 else
                 {
                     thread.Start(alphabet.Substring(startIndex, blockSize)); // запускаем поток и передаём параметр методу FindPass  // параметр = alphabet.Substring(startIndex, blockSize)) = "abcdefghijklmno"
                     Console.WriteLine("symbols for thread №" + i + ": " + alphabet.Substring(startIndex, blockSize));
-                }                 
+                }
             }
             for (int i = 0; i < threads.Count; i++)
             {
@@ -183,6 +182,92 @@ namespace admChecker
 
             //CheckPasword("12S");
             Console.WriteLine("realPassword=" + realPassword);
+       }
+
+
+
+
+
+        static void FindByTask(int countTasks) //колличество задач: для 2 потоков - 15 sec // для 4 потоков - 9 sec// для 8 потоков долго //для 16 потоков долго
+        {
+            isFound = false;
+            realPassword = "";
+            //alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            Console.WriteLine("alphabet.Length = " + alphabet.Length); 
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+                             
+
+            
+            List<Task> tasks = new List<Task>(countTasks);   // создаем список задач, на countTasks ячеек         
+            int blockSize = (int)Math.Ceiling((double)alphabet.Length / countTasks); // длину алфавита делим на колличество задач (62 символов делим на 4 - ре потока и округляет в большую сторону = 16), для первой буквы пароля
+            Console.WriteLine("blockSize = " + blockSize);
+            for (int i = 0; i < countTasks; i++)
+            {
+               
+                int startIndex = i * blockSize; // startIndex -- это номер символа, с которого начинаем копировать строку
+                if (alphabet.Length - startIndex < blockSize) // если мы подошли близко к концу строки, осталось количество символов = alphabet.Length - startIndex = 62 - 48
+                {
+
+                    //Thread thread = new Thread(FindPass);                   
+                    //thread.Start(alphabet.Substring(startIndex, alphabet.Length - startIndex));
+
+                    Task task = new Task(() => FindPass(alphabet.Substring(startIndex, alphabet.Length - startIndex))); // создаём task и говорим task, что он будет выполнять метод FindPass
+                    tasks.Add(task); // добавляем поток в список потоков                    
+                    task.Start();
+                    Console.WriteLine("symbols for task №" + i + ": " + alphabet.Substring(startIndex, alphabet.Length - startIndex)); //  осталось количество символов = alphabet.Length - startIndex = 62 - 48 = 14
+                    break;
+                }
+                else
+                {
+                    // Task task = new Task(Method);
+                    // Action action = () => FindPass(alphabet.Substring(startIndex, blockSize));
+                    //action = Method;
+                    // Task task = new Task(action); // создаём task, передаём параметр методу FindPass  
+                    Task task = new Task(() => FindPass(alphabet.Substring(startIndex, blockSize)));
+                    // параметр = alphabet.Substring(startIndex, blockSize)) = "abcdefghijklmno"
+                    // и говорим потоку, что он будет выполнять метод FindPass
+                    tasks.Add(task); // добавляем task в список task
+                    task.Start(); // запускаем task 
+                    Console.WriteLine("symbols for task №" + i + ": " + alphabet.Substring(startIndex, blockSize));
+                }
+            }
+            //for (int i = 0; i < tasks.Count; i++)
+            //{
+            //    tasks[i].Wait();
+            //}
+            Task.WaitAll(tasks.ToArray());
+            for (int i = 0; i < tasks.Count; i++)
+            {
+                tasks[i].Dispose();
+            }
+
+            stopwatch.Stop();
+            Console.WriteLine($"Elapsed Time is {stopwatch.ElapsedMilliseconds} ms");
+            //CheckPasword("12S");
+            Console.WriteLine("realPassword=" + realPassword);
+           
+        }
+
+
+        //static void Method()
+        //{
+        //    int startIndex = 0;
+        //    int blockSize = 16;
+        //    FindPass(alphabet.Substring(startIndex, blockSize));
+        //}
+
+
+
+
+
+        static void Main(string[] args)
+        {           
+            FindByTask(4); // 9 сек
+            Console.WriteLine("========================================");
+            Thread.Sleep(2000);
+            FindByThread(4); // 9 sec
             Console.Read();
         }
 
@@ -190,15 +275,3 @@ namespace admChecker
 }
 
 
-
-
-
-
-
-
-
-//threads[countTreads - 1] = new Thread(FindPass); //последний поток = 4-1 = 3 //  создаём поток и говорим потоку, что он будет выполнять метод FindPass
-//int startIndex = (countTreads - 1) * blockSize; // startIndex -- это номер символа, с которого начинаем копировать строку for last thread //  
-//                                                // startIndex =  (countTreads - 1]) * blockSize =  (4-1) * 15 = 45;
-//
-//Console.WriteLine(alphabet.Substring(startIndex, alphabet.Length - startIndex));

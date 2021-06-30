@@ -11,3 +11,17 @@ D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\admChecker\obj\Debug\admChecker.cspro
 D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\admChecker\obj\Debug\admChecker.csproj.CoreCompileInputs.cache
 D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\admChecker\obj\Debug\admChecker.exe
 D:\c#\lesson67\ThreadJoins (1)\ThreadJoins\admChecker\obj\Debug\admChecker.pdb
+D:\c#\lesson67\ThreadJoinsPasswordUnlock\ThreadJoins\admChecker\bin\Debug\admChecker.exe.config
+D:\c#\lesson67\ThreadJoinsPasswordUnlock\ThreadJoins\admChecker\bin\Debug\admChecker.exe
+D:\c#\lesson67\ThreadJoinsPasswordUnlock\ThreadJoins\admChecker\bin\Debug\admChecker.pdb
+D:\c#\lesson67\ThreadJoinsPasswordUnlock\ThreadJoins\admChecker\obj\Debug\admChecker.csprojAssemblyReference.cache
+D:\c#\lesson67\ThreadJoinsPasswordUnlock\ThreadJoins\admChecker\obj\Debug\admChecker.csproj.CoreCompileInputs.cache
+D:\c#\lesson67\ThreadJoinsPasswordUnlock\ThreadJoins\admChecker\obj\Debug\admChecker.exe
+D:\c#\lesson67\ThreadJoinsPasswordUnlock\ThreadJoins\admChecker\obj\Debug\admChecker.pdb
+D:\c#\lesson68\TaskThreadJoinsPasswordUnlock\ThreadJoins\admChecker\bin\Debug\admChecker.exe.config
+D:\c#\lesson68\TaskThreadJoinsPasswordUnlock\ThreadJoins\admChecker\bin\Debug\admChecker.exe
+D:\c#\lesson68\TaskThreadJoinsPasswordUnlock\ThreadJoins\admChecker\bin\Debug\admChecker.pdb
+D:\c#\lesson68\TaskThreadJoinsPasswordUnlock\ThreadJoins\admChecker\obj\Debug\admChecker.csprojAssemblyReference.cache
+D:\c#\lesson68\TaskThreadJoinsPasswordUnlock\ThreadJoins\admChecker\obj\Debug\admChecker.csproj.CoreCompileInputs.cache
+D:\c#\lesson68\TaskThreadJoinsPasswordUnlock\ThreadJoins\admChecker\obj\Debug\admChecker.exe
+D:\c#\lesson68\TaskThreadJoinsPasswordUnlock\ThreadJoins\admChecker\obj\Debug\admChecker.pdb
