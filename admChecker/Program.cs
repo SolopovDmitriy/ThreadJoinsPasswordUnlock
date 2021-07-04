@@ -27,7 +27,7 @@ namespace admChecker
                 {
                     securePwd.AppendChar(item);//AppendChar(item) - добавляем букву  - item в securePwd
                 }
-                Process.Start("calc.exe", "Lusa2", securePwd, ""); // если открывает калькулятор, то код выполняется дальше
+                Process.Start("calc.exe", "Lusa", securePwd, ""); // если открывает калькулятор, то код выполняется дальше
                                                                    // если ошибка, то идём в  catch (Win32Exception ex), пропуская realPassword = password;
              
                 realPassword = password;               
@@ -160,13 +160,13 @@ namespace admChecker
                 { //alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
                     thread.Start(alphabet.Substring(startIndex, alphabet.Length - startIndex));
-                    Console.WriteLine("symbols for thread №" + i + ": " + alphabet.Substring(startIndex, alphabet.Length - startIndex)); //  осталось количество символов = alphabet.Length - startIndex = 62 - 48 = 14
+                   // Console.WriteLine("symbols for thread №" + i + ": " + alphabet.Substring(startIndex, alphabet.Length - startIndex)); //  осталось количество символов = alphabet.Length - startIndex = 62 - 48 = 14
                     break;
                 }
                 else
                 {
                     thread.Start(alphabet.Substring(startIndex, blockSize)); // запускаем поток и передаём параметр методу FindPass  // параметр = alphabet.Substring(startIndex, blockSize)) = "abcdefghijklmno"
-                    Console.WriteLine("symbols for thread №" + i + ": " + alphabet.Substring(startIndex, blockSize));
+                    //Console.WriteLine("symbols for thread №" + i + ": " + alphabet.Substring(startIndex, blockSize));
                 }
             }
             for (int i = 0; i < threads.Count; i++)
@@ -181,7 +181,7 @@ namespace admChecker
 
 
             //CheckPasword("12S");
-            Console.WriteLine("realPassword=" + realPassword);
+            Console.WriteLine("realPassword FindByThread = " + realPassword);
        }
 
 
@@ -216,7 +216,7 @@ namespace admChecker
                     Task task = new Task(() => FindPass(alphabet.Substring(startIndex, alphabet.Length - startIndex))); // создаём task и говорим task, что он будет выполнять метод FindPass
                     tasks.Add(task); // добавляем поток в список потоков                    
                     task.Start();
-                    Console.WriteLine("symbols for task №" + i + ": " + alphabet.Substring(startIndex, alphabet.Length - startIndex)); //  осталось количество символов = alphabet.Length - startIndex = 62 - 48 = 14
+                    //Console.WriteLine("symbols for task №" + i + ": " + alphabet.Substring(startIndex, alphabet.Length - startIndex)); //  осталось количество символов = alphabet.Length - startIndex = 62 - 48 = 14
                     break;
                 }
                 else
@@ -230,7 +230,7 @@ namespace admChecker
                     // и говорим потоку, что он будет выполнять метод FindPass
                     tasks.Add(task); // добавляем task в список task
                     task.Start(); // запускаем task 
-                    Console.WriteLine("symbols for task №" + i + ": " + alphabet.Substring(startIndex, blockSize));
+                    //Console.WriteLine("symbols for task №" + i + ": " + alphabet.Substring(startIndex, blockSize));
                 }
             }
             //for (int i = 0; i < tasks.Count; i++)
@@ -246,7 +246,7 @@ namespace admChecker
             stopwatch.Stop();
             Console.WriteLine($"Elapsed Time is {stopwatch.ElapsedMilliseconds} ms");
             //CheckPasword("12S");
-            Console.WriteLine("realPassword=" + realPassword);
+            Console.WriteLine("realPassword in FindByTask = " + realPassword);
            
         }
 
@@ -258,17 +258,76 @@ namespace admChecker
         //    FindPass(alphabet.Substring(startIndex, blockSize));
         //}
 
+        static async Task FindByAsync(int countTasks) //колличество задач: для 2 потоков - 15 sec // для 4 потоков - 9 sec// для 8 потоков долго //для 16 потоков долго
+        {
+            isFound = false;
+            realPassword = "";
+            //alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            alphabet = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            Console.WriteLine("alphabet.Length = " + alphabet.Length);
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
 
 
 
+            List<Task> tasks = new List<Task>(countTasks);   // создаем список задач, на countTasks ячеек         
+            int blockSize = (int)Math.Ceiling((double)alphabet.Length / countTasks); // длину алфавита делим на колличество задач (62 символов делим на 4 - ре потока и округляет в большую сторону = 16), для первой буквы пароля
+            Console.WriteLine("blockSize = " + blockSize);
+            for (int i = 0; i < countTasks; i++)
+            {
 
-        static void Main(string[] args)
-        {           
-            FindByTask(4); // 9 сек
+                int startIndex = i * blockSize; // startIndex -- это номер символа, с которого начинаем копировать строку
+                if (alphabet.Length - startIndex < blockSize) // если мы подошли близко к концу строки, осталось количество символов = alphabet.Length - startIndex = 62 - 48
+                {
+
+                    //Thread thread = new Thread(FindPass);                   
+                    //thread.Start(alphabet.Substring(startIndex, alphabet.Length - startIndex));
+
+                    Task task = new Task(() => FindPass(alphabet.Substring(startIndex, alphabet.Length - startIndex))); // создаём task и говорим task, что он будет выполнять метод FindPass
+                    tasks.Add(task); // добавляем поток в список потоков                    
+                    task.Start();
+                    //Console.WriteLine("symbols for task №" + i + ": " + alphabet.Substring(startIndex, alphabet.Length - startIndex)); //  осталось количество символов = alphabet.Length - startIndex = 62 - 48 = 14
+                    break;
+                }
+                else
+                {
+                    // Task task = new Task(Method);
+                    // Action action = () => FindPass(alphabet.Substring(startIndex, blockSize));
+                    //action = Method;
+                    // Task task = new Task(action); // создаём task, передаём параметр методу FindPass  
+                    Task task = new Task(() => FindPass(alphabet.Substring(startIndex, blockSize)));
+                    // параметр = alphabet.Substring(startIndex, blockSize)) = "abcdefghijklmno"
+                    // и говорим потоку, что он будет выполнять метод FindPass
+                    tasks.Add(task); // добавляем task в список task
+                    task.Start(); // запускаем task 
+                   // Console.WriteLine("symbols for task №" + i + ": " + alphabet.Substring(startIndex, blockSize));
+                }
+            }
+           
+            // Task.WaitAll(tasks.ToArray()); // old row
+            await Task.WhenAll(tasks.ToArray()); // new row
+          
+            stopwatch.Stop();
+            Console.WriteLine($"Elapsed Time is {stopwatch.ElapsedMilliseconds} ms");
+            //CheckPasword("12S");
+            Console.WriteLine("realPassword in FindByAsync = " + realPassword);
+
+        }
+
+
+
+        static async Task Main(string[] args)
+        {
+            FindByTask(62); // 9 сек
             Console.WriteLine("========================================");
             Thread.Sleep(2000);
-            FindByThread(4); // 9 sec
-            Console.Read();
+            FindByThread(62); // 9 sec
+
+            Console.WriteLine("========================================");
+            await FindByAsync(62);
+            Console.WriteLine("end");
+            Console.ReadKey();
+            
         }
 
     }
